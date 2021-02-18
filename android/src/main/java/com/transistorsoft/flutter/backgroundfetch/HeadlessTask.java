@@ -167,6 +167,9 @@ public class HeadlessTask implements MethodChannel.MethodCallHandler, Runnable {
 
         @Override
         public void run() {
+            if(mContext == null){
+                return;
+            }
             SharedPreferences prefs = mContext.getSharedPreferences(BackgroundFetch.TAG, Context.MODE_PRIVATE);
 
             // There is weirdness with the class of these callbacks (Integer vs Long) between assembleDebug vs assembleRelease.
@@ -195,6 +198,9 @@ public class HeadlessTask implements MethodChannel.MethodCallHandler, Runnable {
     class TaskRunner implements Runnable {
         @Override
         public void run() {
+            if(mContext == null){
+                return;
+            }
             SharedPreferences prefs = mContext.getSharedPreferences(BackgroundFetch.TAG, Context.MODE_PRIVATE);
             mRegistrationCallbackId = prefs.getLong(KEY_REGISTRATION_CALLBACK_ID, -1);
             mClientCallbackId = prefs.getLong(KEY_CLIENT_CALLBACK_ID, -1);
